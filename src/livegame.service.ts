@@ -117,7 +117,11 @@ export class LivegameService {
           return of(cached);
         }
 
-        return this.http.get<DeeplolStreamerPro>(url).pipe(
+        return this.http.get<DeeplolStreamerPro>(url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+          }
+        }).pipe(
           map(response => response.data),
           tap(res => this.cacheManager.set(cacheKey, res, 60 * 3 * 1000)),
           catchError(error => {
@@ -219,7 +223,11 @@ export class LivegameService {
         if (cached) return of(cached);
 
 
-        return this.http.get<DeepLolSummonerCachedResponse>(url).pipe(
+        return this.http.get<DeepLolSummonerCachedResponse>(url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+          }
+        }).pipe(
           map(response => response.data),
           tap(res => this.cacheManager.set(cacheKey, res, 60 * 240 * 1000)),
           catchError(error => {
@@ -247,7 +255,8 @@ export class LivegameService {
         if (cached) return of(cached);
         return this.http.post(url, formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
           }
         }).pipe(
           tap(response => {
@@ -285,7 +294,11 @@ export class LivegameService {
     ).pipe(
       switchMap(cached => {
         if (cached) return of(cached);
-        return this.http.get<Summoner>(url).pipe(
+        return this.http.get<Summoner>(url, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+          }
+        }).pipe(
 
           map(response => response.data),
           catchError(error => {
